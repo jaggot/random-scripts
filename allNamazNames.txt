@@ -1,0 +1,6 @@
+1 Fajr
+2 Dhuhr
+3 Asr
+4 Maghrib
+5 Isha
+6 NOTHING

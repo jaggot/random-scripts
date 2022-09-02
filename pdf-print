@@ -1,0 +1,13 @@
+#!/bin/sh
+PRINTER="$( printf "CANCEL\n$(curl http://localhost:631/printers | grep "HREF=\"/printers" | grep TD | sed 's/.*printers//g' | sed 's/<\/A.*//' | sed 's/.*>//')" | dmenu -p "Select Printer" -fn "Monospace 12" -l 10)"
+if [ "$PRINTER" = "CANCEL" ] || [ "$PRINTER" = "" ]; then
+	echo "Exiting..."
+	exit
+fi
+FILE="$(fzf .pdf)"
+FILE="$(printf "CANCEL\n$(ls *.pdf)" | dmenu -p "Select Document" -fn "Monospace 11" -l 20)"
+if [ "$FILE" = "CANCEL" ] || [ "$FILE" = "" ]; then
+	echo "Exiting..."
+	exit;
+fi
+[ "$(printf "No\nYes" | dmenu -p "Are you sure you want to print?" -fn "Monospace 12")" = "Yes" ] && lp -d "$PRINTER" "$FILE" || printf "Exiting..."

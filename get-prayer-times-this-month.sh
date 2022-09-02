@@ -1,0 +1,1 @@
+curl https://www.muslimpro.com/Prayer-times-in-Little-Ferry-NJ-United-States-5100542 | sed -e 's/prayertime-1">/\nSALAH_TIME/g' -e 's/<td class="prayertime">/ /g' -e 's/<\/td>//g' -e 's/<\/tr>//g' | grep SALAH_TIME | sed -e 's/SALAH_TIME//' -e 's/<.*"//g' | awk '{print $4" "$5" "$6" "$7" "$8}'
